@@ -6,7 +6,7 @@
  * Copyright 2008 Eric Bodden
  */
 
-package ca.mcgill.sable.racer;
+package hk.ust.cse.comp5111;
 
 /**
  * The 'exclusive' state in the racer algorithm. It is parameterized with
@@ -40,7 +40,7 @@ public class ExclusiveState extends State {
 	protected State newStateOnRead(Thread t,int accessRegion) {
 		if(t==this.t) {
 			return this;
-		} else if (Racer.aspectOf().canSee(t,accessRegion,this.t,this.accessRegion)) {
+		} else if (Deadlock.aspectOf().canSee(t,accessRegion,this.t,this.accessRegion)) {
 			State s = new ExclusiveState(t,accessRegion,this,true);
 			s.locks.clear();
 			s.locks.add(FULLSET_MARKER);
@@ -56,7 +56,7 @@ public class ExclusiveState extends State {
 	protected State newStateOnWrite(Thread t,int accessRegion) {
 		if(t==this.t) {
 			return new ModifiedState(t,accessRegion,this,false);
-		} else if (Racer.aspectOf().canSee(t,accessRegion,this.t,this.accessRegion)) {
+		} else if (Deadlock.aspectOf().canSee(t,accessRegion,this.t,this.accessRegion)) {
 			return new ModifiedState(t,accessRegion,this,true);
 		} else {
 			return new SharedModifiedState(this);

@@ -6,7 +6,7 @@
  * Copyright 2008 Eric Bodden
  */
 
-package ca.mcgill.sable.racer;
+package hk.ust.cse.comp5111;
 
 /**
  * The exclusive-modified state from the racer algorithm.

@@ -6,7 +6,7 @@
  * Copyright 2008 Eric Bodden
  */
 
-package ca.mcgill.sable.racer;
+package hk.ust.cse.comp5111;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,7 +22,7 @@ import org.aspectj.lang.reflect.SourceLocation;
  *
  * @author Eric Bodden
  */
-public aspect Racer {
+public aspect Deadlock {
 	
 	protected static class ThreadAndPeriod {
 		final Thread t;

@@ -6,7 +6,7 @@
  * Copyright 2008 Eric Bodden
  */
 
-package ca.mcgill.sable.racer;
+package hk.ust.cse.comp5111;
 
 /**
  * Locking aspect, keeping track of thread-local lock sets.
@@ -21,20 +21,20 @@ public aspect Locking {
 		 }
 	};
 	
-	before(Object l): lock() && args(l) && Racer.scope() {
+	before(Object l): lock() && args(l) && Deadlock.scope() {
 		Bag locks = (Bag)locksHeld.get();
 		locks.add(l);
-		if(Racer.LOGGING) {
+		if(Deadlock.LOGGING) {
 			System.err.println("LOCK:   Thread "+
 					Thread.currentThread().getName()+" holds locks: "+locks);
 		}
 	}
 
-	after(Object l): unlock() && args(l) && Racer.scope() {
+	after(Object l): unlock() && args(l) && Deadlock.scope() {
 		Bag locks = (Bag)locksHeld.get();
 		assert locks.contains(l);
 		locks.remove(l);
-		if(Racer.LOGGING) {
+		if(Deadlock.LOGGING) {
 			System.err.println("UNLOCK: Thread "+
 					Thread.currentThread().getName()+" holds locks: "+locks);
 		}
